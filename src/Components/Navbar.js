@@ -1,30 +1,29 @@
-import React, { Fragment } from "react";
-import {BrowserRouter as Router, Link } from "react-router-dom";
-
+import React from "react";
+import { Link } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 const Navbar = () => {
 
-  return (
-
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/Home">Home</Link>
-            </li>
-            <li>
-              <Link to="/Register">Register</Link>
-            </li>
-            <li>
-              <Link to="/Signin">Signin</Link>
-            </li>
-            <li>
-              <Link to="/ProfilePag">ProfilePag</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-  
+  return (   
+    <div>
+        <AppBar position="static">
+        <Toolbar>
+          
+          <Typography variant="h6" component ="h1" >
+            FaceApp
+          </Typography>
+          <Button component={Link}  to="/Home" color="inherit">Home</Button>
+          <Button component={Link}  to="/Register"  color="inherit">Register</Button>
+          <Button component={Link}  to="/Signin" color="inherit">Signin</Button>
+          <Button component={Link}  to="/ProfilePag"  color="inherit">ProfilePag</Button>
+        </Toolbar>
+      </AppBar>
+    
+    </div>
   );
 };
 
