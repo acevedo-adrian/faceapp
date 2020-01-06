@@ -1,13 +1,11 @@
 import React, { Fragment } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Register from "./Register";
-import Signin from "./Signin";
-import ProfilePag from "./ProfilePag";
-import Home from "./Home";
+import {BrowserRouter as Router, Link } from "react-router-dom";
+
 
 const Navbar = () => {
+
   return (
-    <Router>
+
       <div>
         <nav>
           <ul>
@@ -25,25 +23,8 @@ const Navbar = () => {
             </li>
           </ul>
         </nav>
-
-        {/* A <Switch> looks through its children <Route>s and
-                renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/Home">
-            <Home />
-          </Route>
-          <Route path="/Register">
-            <Register />
-          </Route>
-          <Route path="/Signin">
-            <Signin />
-          </Route>
-          <Route path="/ProfilePag">
-            <ProfilePag />
-          </Route>
-        </Switch>
       </div>
-    </Router>
+  
   );
 };
 
