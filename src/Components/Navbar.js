@@ -1,25 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { withStyles } from "@material-ui/core/styles";
 
-const Navbar = () => {
+const Navbar = (props) => {
 
   return (   
     <div>
-        <AppBar position="static">
-        <Toolbar>
+        <AppBar position="static" elevation={0} className={props.classes.appBar}>
+        <Toolbar className={props.classes.toolbar}>
           
-          <Typography variant="h6" component ="h1" >
+          <Typography variant="h6" component ="h1" noWrap className={props.classes.toolbarTitle}>
             FaceApp
           </Typography>
-          <Button component={Link}  to="/Home" color="inherit">Home</Button>
-          <Button component={Link}  to="/Register"  color="inherit">Register</Button>
-          <Button component={Link}  to="/Signin" color="inherit">Signin</Button>
-          <Button component={Link}  to="/ProfilePag"  color="inherit">ProfilePag</Button>
+          <nav>
+          <Button component={Link}  to="/Home" color="inherit" className={props.classes.link}>Home</Button>
+          <Button component={Link}  to="/Register"  color="inherit" className={props.classes.link}>Registro</Button>
+          <Button component={Link}  to="/Signin" color="inherit" className={props.classes.link}>Login</Button>
+          <Button component={Link}  to="/ProfilePag"  color="inherit" className={props.classes.link}>Perfil</Button>
+          </nav>
         </Toolbar>
       </AppBar>
     
@@ -27,4 +29,20 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default withStyles(
+  {
+    appBar: {
+      borderBottom: `1px solid`,
+    },
+    toolbarTitle: {
+      flexGrow: 1,
+    },
+    toolbar: {
+      flexWrap: 'wrap',
+    },
+    link: {
+      margin: (1, 1.5),
+    }
+
+  }
+)(Navbar);

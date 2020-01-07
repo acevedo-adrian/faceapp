@@ -1,47 +1,64 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
+import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
+import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
+import Grid from "@material-ui/core/Grid";
 
-const User = ({ user }) => {
+
+const User = props => {
   // const classes = useStyles();
   // const [expanded, setExpanded] = React.useState(false);
 
-  const { first, last } = user.name;
-  const img = user.picture.large;
+  const { first, last } = props.user.name;
+  const img = props.user.picture.large;
 
   return (
-    <Card>
-      <CardHeader title={first} subheader="September 14, 2016" />
-      <CardMedia image="/static/images/cards/paella.jpg" title="Paella dish" />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
-        </Typography>
-      </CardContent>
-
-      <Collapse timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and
-            set aside for 10 minutes.
-          </Typography>
-        </CardContent>
-      </Collapse>
-    </Card>
+    <Grid item xs={12} sm={6} md={4}>
+      <Card className={props.classes.card} >
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt="Contemplative Reptile"
+            height="140"
+            image={img}
+            title="Contemplative Reptile"
+          />
+          <CardContent>
+            <Typography gutterBottom color="textSecondary" component="h3">
+              Hola, mi nombre es
+            </Typography>
+            <Typography variant="h6" component="h3">
+              {last}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        
+      </Card>
+    </Grid>
   );
 };
 
-export default User;
+export default withStyles({
+  // card: {
+  //   maxWidth: 200,
+  // },
+  // media: {
+  //   height: 0,
+  //   paddingTop: '40%', // 16:9
+  // },
+
+  card: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column"
+  },
+  cardMedia: {
+    paddingTop: "56.25%" // 16:9
+  },
+  cardContent: {
+    flexGrow: 1
+  }
+})(User);

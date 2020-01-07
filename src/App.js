@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Navbar from "./Components/Navbar";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Register from "./Components/Register";
 import Signin from "./Components/Signin";
 import ProfilePag from "./Components/ProfilePag";
 import Home from "./Components/Home";
+import Container from "@material-ui/core/Container";
 
 class App extends Component {
   state = {
@@ -30,19 +31,20 @@ class App extends Component {
     return (
       <Router>
         <Navbar />
-
-        <Route path="/Home">
-          <Home users={this.state.users} />
-        </Route>
-        <Route path="/Register">
-          <Register />
-        </Route>
-        <Route path="/Signin">
-          <Signin />
-        </Route>
-        <Route path="/ProfilePag">
-          <ProfilePag />
-        </Route>
+        <Container maxWidth="md">
+          <Route path="/Home">
+            <Home users={this.state.users} />
+          </Route>
+          <Route path="/Register">
+            <Register />
+          </Route>
+          <Route path="/Signin">
+            <Signin />
+          </Route>
+          <Route path="/ProfilePag">
+            <ProfilePag />
+          </Route>
+        </Container>
       </Router>
     );
   }
