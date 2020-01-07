@@ -42,7 +42,7 @@ class App extends Component {
             <Signin />
           </Route>
           <Route path="/ProfilePag">
-            <ProfilePag />
+            <ProfilePag users={this.state.users} />
           </Route>
         </Container>
       </Router>

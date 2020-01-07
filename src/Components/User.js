@@ -7,17 +7,13 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
-
 const User = props => {
-  // const classes = useStyles();
-  // const [expanded, setExpanded] = React.useState(false);
-
   const { first, last } = props.user.name;
   const img = props.user.picture.large;
 
   return (
     <Grid item xs={12} sm={6} md={4}>
-      <Card className={props.classes.card} >
+      <Card className={props.classes.card}>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -35,7 +31,6 @@ const User = props => {
             </Typography>
           </CardContent>
         </CardActionArea>
-        
       </Card>
     </Grid>
   );

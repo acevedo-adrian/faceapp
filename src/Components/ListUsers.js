@@ -1,6 +1,5 @@
 import React from "react";
 import User from "./User";
-
 import Grid from "@material-ui/core/Grid";
 
 const ListUsers = ({ users }) => (

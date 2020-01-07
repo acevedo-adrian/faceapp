@@ -1,6 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
 
-const ProfilePag = () => {
-  return <h1>ProfilePag</h1>;
-};
+class ProfilePag extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      users: props.users
+    };
+  }
+  render() {
+    return <h1>Desde return</h1>;
+  }
+}
+
 export default ProfilePag;
