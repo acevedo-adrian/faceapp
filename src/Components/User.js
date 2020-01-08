@@ -12,7 +12,7 @@ const User = props => {
   const img = props.user.picture.large;
 
   return (
-    <Grid item xs={12} sm={6} md={4}>
+    <Grid item xs={12} sm={6} md={4} className={props.classes.paper}>
       <Card className={props.classes.card}>
         <CardActionArea>
           <CardMedia
@@ -27,7 +27,7 @@ const User = props => {
               Hola, mi nombre es
             </Typography>
             <Typography variant="h6" component="h3">
-              {last}
+              {(last, first)}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -37,13 +37,12 @@ const User = props => {
 };
 
 export default withStyles({
-  // card: {
-  //   maxWidth: 200,
-  // },
-  // media: {
-  //   height: 0,
-  //   paddingTop: '40%', // 16:9
-  // },
+  paper: {
+    marginTop: 8,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
 
   card: {
     height: "100%",
@@ -51,7 +50,7 @@ export default withStyles({
     flexDirection: "column"
   },
   cardMedia: {
-    paddingTop: "56.25%" // 16:9
+    paddingTop: "10%" // 16:9
   },
   cardContent: {
     flexGrow: 1

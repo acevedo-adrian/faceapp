@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -15,7 +10,6 @@ class Signin extends Component {
   render() {
     return (
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <div className={this.props.classes.paper}>
           <Avatar className={this.props.classes.avatar}></Avatar>
           <Typography component="h1" variant="h5">
@@ -49,7 +43,7 @@ class Signin extends Component {
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={this.props.classes.submit}
             >
               Acceder
@@ -62,7 +56,7 @@ class Signin extends Component {
 }
 export default withStyles({
   paper: {
-    marginTop: 8,
+    marginTop: 10,
     display: "flex",
     flexDirection: "column",
     alignItems: "center"

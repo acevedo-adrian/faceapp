@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -13,16 +12,16 @@ class Register extends Component {
   render() {
     return (
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <div className={this.props.classes.paper}>
           <Avatar className={this.props.classes.avatar}></Avatar>
           <Typography component="h1" variant="h5">
             Registrate
           </Typography>
           <form className={this.props.classes.form} noValidate>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  margin="normal"
                   autoComplete="fname"
                   name="firstName"
                   variant="outlined"
@@ -35,6 +34,7 @@ class Register extends Component {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  margin="normal"
                   variant="outlined"
                   required
                   fullWidth
@@ -57,6 +57,7 @@ class Register extends Component {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  margin="normal"
                   variant="outlined"
                   required
                   fullWidth
@@ -67,18 +68,16 @@ class Register extends Component {
                   autoComplete="current-password"
                 />
               </Grid>
-            
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              color="primary"
+              color="secondary"
               className={this.props.classes.submit}
             >
               Registrarse
             </Button>
-            
           </form>
         </div>
         <Box mt={5}></Box>
@@ -89,14 +88,13 @@ class Register extends Component {
 
 export default withStyles({
   paper: {
-    marginTop: 8,
+    marginTop: 10,
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
   },
   avatar: {
-    margin: 1,
-    
+    margin: 1
   },
   form: {
     width: "100%",

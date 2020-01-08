@@ -8,38 +8,22 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
-class ProfilePag extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  async componentDidMount() {
-    await this.filterUsers();
-  }
-  filterUsers = () => {
-    const { users } = this.props;
-    const user = users.filter(user => {
-      if (user.login.username === "smallgorilla841") {
-        return user;
-      }
-    });
-    this.setState({
-      users: users
-    });
-  };
-
-  render() {
-    const { classes } = this.props;
-    console.log(this.state);
-    return (
-      <Container component="main" maxWidth="xs">
-        <div className={classes.paper}>
-          <h1>Hola</h1>
-        </div>
-      </Container>
-    );
-  }
-}
+const ProfilePag = props => {
+  const { users, classes } = props;
+  const userSelect = users.filter(user => {
+    if (user.login.username === "smallgorilla841") {
+      return user;
+    }
+  });
+  console.log(userSelect);
+  return (
+    <Container component="main" maxWidth="xs">
+      <div className={classes.paper}>
+        <h1>Hola</h1>
+      </div>
+    </Container>
+  );
+};
 
 export default withStyles({
   paper: {
