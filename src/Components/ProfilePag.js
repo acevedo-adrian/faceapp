@@ -1,65 +1,79 @@
-import React, { Component } from "react";
+import React from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import Button from "@material-ui/core/Button";
 
-class ProfilePag extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: []
-    };
-  }
-
-  filterUsers = () => {
-    const user = this.props.users.filter(user => {
-      if (user.login.username === "smallgorilla841") {
+const ProfilePag = props => {
+  const filterUsers = () => {
+    const user = props.users.filter(user => {
+      if (user.login.username === "blackbutterfly676") {
         return user;
       }
     });
     return user;
   };
 
-  render() {
-    if (this.props.users.length > 0) {
-      const user = this.filterUsers();
+  if (props.users.length > 0) {
+    const user = filterUsers();
+    const { classes } = props;
 
-      const { classes } = this.props;
-
-      return (
-        <Container component="main" maxWidth="md">
-          <div className={classes.paper}>
-            <Avatar
-              alt="Remy Sharp"
-              src={user[0].picture.large}
-              className={classes.large}
-            />
-            <Typography component="h1" variant="h5">
-              {user[0].login.username}
-            </Typography>
-            <form className={this.props.classes.form} noValidate>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    margin="normal"
-                    autoComplete="fname"
-                    name="firstName"
-                    variant="outlined"
-                    required
-                    fullWidth
-                    id="firstName"
-                    label="Apellido"
-                    defaultValue={user[0].name.first}
-                    autoFocus
-                  />
-                </Grid>
-                <Grid item xs={12} >
-                <TextField                  
+    return (
+      <Container component="main" maxWidth="xs">
+        <div className={classes.paper}>
+          <Avatar
+            alt="Remy Sharp"
+            src={user[0].picture.large}
+            className={classes.large}
+          />
+          <form className={props.classes.form} noValidate>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  margin="normal"
+                  autoComplete="username"
+                  name="username"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Nombre de Usuario"
+                  defaultValue={user[0].login.username}
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="password"
+                  name="password"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  type="password"
+                  id="password"
+                  label="password"
+                  defaultValue={user[0].login.password}
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="fname"
+                  name="firstName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="Apellido"
+                  defaultValue={user[0].name.first}
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
                   variant="outlined"
                   required
                   fullWidth
@@ -94,8 +108,6 @@ class ProfilePag extends Component {
                   autoComplete="street"
                 />
               </Grid>
-              {/* buenas noches, tengo una duda, paso un state(el cual esta cargado con una consulta a una api) este state lo paso a un componente como props, el problemas es que cuando hace por primera ves el componente el props es [], luego pasa un ratito y se carga con los valores que le pase. 
-              quisiera saber como hago para poder deteneter el render hasta que este cargado el props, yo lo que hice es un if(que mientras props esta [] tire un spiner de carga caso contrario renderiza los datos que recibe por props) */}
               <Grid item xs={4}>
                 <TextField
                   variant="outlined"
@@ -144,16 +156,30 @@ class ProfilePag extends Component {
                   autoComplete="country"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="secondary"
+                  className={props.classes.submit}
+                >
+                  Guardar Cambios
+                </Button>
               </Grid>
-            </form>
-          </div>
-        </Container>
-      );
-    } else {
-      return <p className="text-center">Cargando empleados...</p>;
-    }
+            </Grid>
+          </form>
+        </div>
+      </Container>
+    );
+  } else {
+    return (
+      <div className={props.classes.root}>
+        <LinearProgress variant="query" color="secondary" />
+      </div>
+    );
   }
-}
+};
 
 export default withStyles({
   paper: {
@@ -167,7 +193,10 @@ export default withStyles({
     margin: 1
   },
   large: {
-    width: 300,
-    height: 300
+    width: 200,
+    height: 200
+  },
+  submit: {
+    margin: (3, 0, 2)
   }
 })(ProfilePag);

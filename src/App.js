@@ -34,7 +34,7 @@ class App extends Component {
         <Navbar />
         <Container maxWidth="md">
           <CssBaseline />
-          <Route path="/Home">
+          <Route exact path="/">
             <Home users={this.state.users} />
           </Route>
           <Route path="/Register">

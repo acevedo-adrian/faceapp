@@ -21,7 +21,7 @@ const Navbar = props => {
         <nav>
           <Button
             component={Link}
-            to="/Home"
+            to="/"
             color="inherit"
             className={props.classes.link}
           >

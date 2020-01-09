@@ -1,14 +1,14 @@
 import React from "react";
 import ListUsers from "./ListUsers";
-import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import FaceIcon from "@material-ui/icons/Face";
 
 const Home = props => {
   const { users, classes } = props;
   return (
     <div className={classes.paper}>
-      <Avatar className={classes.avatar}></Avatar>
+      <FaceIcon className={classes.avatar}></FaceIcon>
       <Typography component="h1" variant="h5">
         Usuarios Registrados
       </Typography>
@@ -26,6 +26,7 @@ export default withStyles({
     alignItems: "center"
   },
   avatar: {
-    margin: 1
+    width: 50,
+    height: 50
   }
 })(Home);
