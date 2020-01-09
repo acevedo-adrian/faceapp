@@ -6,6 +6,7 @@ import Signin from "./Components/Signin";
 import ProfilePag from "./Components/ProfilePag";
 import Home from "./Components/Home";
 import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 class App extends Component {
   state = {
@@ -32,6 +33,7 @@ class App extends Component {
       <Router>
         <Navbar />
         <Container maxWidth="md">
+          <CssBaseline />
           <Route path="/Home">
             <Home users={this.state.users} />
           </Route>
