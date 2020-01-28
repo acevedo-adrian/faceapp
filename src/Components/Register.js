@@ -7,8 +7,45 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import firebase from '../Initializers/firebase'
+
 
 class Register extends Component {
+  // inicializamos nuestro estado inicial
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
+    this.state = {
+      firstName:'',
+      lastName:'',
+      email:'',
+      password:''
+  }
+  } 
+  
+  handleChange(e){  
+    this.setState({
+        [e.target.name]:e.target.value
+    })
+  }
+  handleRegister(e){
+
+
+    firebase.database().ref('users/').push({    
+        firstName: this.state.firstName,
+        lastName : this.state.lastName,
+        email:this.state.email,
+        password:this.state.password
+    }).catch(err=>console.log(err)
+    )
+    e.preventDefault();
+  }
+
+  componentDidMount() {
+    firebase.database()
+    
+  }
   render() {
     return (
       <Container component="main" maxWidth="xs">
@@ -19,18 +56,19 @@ class Register extends Component {
           <Typography component="h1" variant="h5">
             Registrate
           </Typography>
-          <form className={this.props.classes.form} noValidate>
+          <form className={this.props.classes.form}  onSubmit={this.handleRegister}>
             <Grid container spacing={1}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   margin="normal"
-                  autoComplete="fname"
                   name="firstName"
                   variant="outlined"
                   required
                   fullWidth
                   id="firstName"
                   label="Apellido"
+                  value={this.state.firstName}   
+                  onChange={this.handleChange}               
                   autoFocus
                 />
               </Grid>
@@ -44,6 +82,8 @@ class Register extends Component {
                   label="Nombre"
                   name="lastName"
                   autoComplete="lname"
+                  value={this.state.lastName} 
+                  onChange={this.handleChange}      
                 />
               </Grid>
               <Grid item xs={12}>
@@ -55,6 +95,9 @@ class Register extends Component {
                   label="Email"
                   name="email"
                   autoComplete="email"
+                  value={this.state.email}  
+                  onChange={this.handleChange}      
+                  
                 />
               </Grid>
               <Grid item xs={12}>
@@ -67,7 +110,9 @@ class Register extends Component {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="current-password"
+                  value={this.state.password}  
+                  onChange={this.handleChange}      
+                  
                 />
               </Grid>
             </Grid>
