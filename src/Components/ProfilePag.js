@@ -1,35 +1,81 @@
-import React from "react";
+import React,{Component} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import Button from "@material-ui/core/Button";
 
-const ProfilePag = props => {
-  const filterUsers = () => {
-    const user = props.users.filter(user => {
-      if (user.login.username === "blackbutterfly676") {
-        return user;
-      }
-    });
-    return user;
+
+import firebase from '../Initializers/firebase';
+import { render } from "@testing-library/react";
+
+class  ProfilePag extends Component{
+  
+  constructor(props) {
+    super(props);   
+    this.state = {
+      firstName:'',
+      lastName:'',
+      email:'',
+      password:'',
+      stado: false
+     
+  }}
+  componentDidMount() {
+    firebase.database();
+    const keys = localStorage.getItem('key');
+    const keyPase = JSON.parse(keys);
+    this.filterUsers(keyPase);
+
+    
+  }
+  filterUsers(keyPase){
+
+    let user='';
+        firebase
+        .database()
+        .ref("users/")
+        .once("value")
+        .then((snapshot) =>{
+                
+            snapshot.forEach(child => {
+              console.log('desde el keyP1'+ keyPase);
+              console.log('desde el keyP2ß'+ child.key);
+              if(keyPase === child.key){
+                 console.log("values",child.val())
+                // user = child.val();
+                this.setState({
+                  firstName: child.val().firstName,
+                  lastName: child.val().lastName,
+                  email: child.val().email,
+                  password: child.val().password,
+                  stado: true
+                });            
+              }
+        
+          })
+          
+        }).catch((err)=>(console.log(err)));
   };
 
-  if (props.users.length > 0) {
-    const user = filterUsers();
-    const { classes } = props;
 
+
+  
+  
+render(){
+    
+  if(this.state.stado){
+    const { classes  } = this.props;
     return (
       <Container component="main" maxWidth="xs">
         <div className={classes.paper}>
           <Avatar
             alt="Remy Sharp"
-            src={user[0].picture.large}
+            // src={user[0].picture.large}
             className={classes.large}
           />
-          <form className={props.classes.form} noValidate>
+          <form className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -41,7 +87,7 @@ const ProfilePag = props => {
                   fullWidth
                   id="username"
                   label="Nombre de Usuario"
-                  defaultValue={user[0].login.username}
+                  defaultValue={this.state.email}
                   autoFocus
                 />
               </Grid>
@@ -55,7 +101,7 @@ const ProfilePag = props => {
                   type="password"
                   id="password"
                   label="password"
-                  defaultValue={user[0].login.password}
+                  defaultValue={this.state.password}
                   autoFocus
                 />
               </Grid>
@@ -68,7 +114,7 @@ const ProfilePag = props => {
                   fullWidth
                   id="firstName"
                   label="Apellido"
-                  defaultValue={user[0].name.first}
+                  defaultValue={this.state.firstName}
                   autoFocus
                 />
               </Grid>
@@ -80,7 +126,7 @@ const ProfilePag = props => {
                   id="lastName"
                   label="Nombre"
                   name="lastName"
-                  defaultValue={user[0].name.last}
+                  defaultValue={this.state.lastName}
                   autoComplete="lname"
                 />
               </Grid>
@@ -92,11 +138,11 @@ const ProfilePag = props => {
                   id="email"
                   label="Email"
                   name="email"
-                  defaultValue={user[0].email}
+                  defaultValue={this.state.email}
                   autoComplete="email"
                 />
               </Grid>
-              <Grid item xs={8}>
+              {/* <Grid item xs={8}>
                 <TextField
                   variant="outlined"
                   required
@@ -166,19 +212,23 @@ const ProfilePag = props => {
                 >
                   Guardar Cambios
                 </Button>
-              </Grid>
-            </Grid>
+              </Grid>*/}
+            </Grid> 
           </form>
         </div>
       </Container>
     );
-  } else {
-    return (
-      <div className={props.classes.root}>
+  } else{
+    return (<div>
+       <h1>Cargando</h1>
+      <div className={this.props.classes.root}>
         <LinearProgress variant="query" color="secondary" />
       </div>
-    );
+    </div>
+           
+      )
   }
+}
 };
 
 export default withStyles({

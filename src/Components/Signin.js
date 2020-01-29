@@ -5,10 +5,58 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
+import firebase from '../Initializers/firebase';
+import { Redirect} from 'react-router-dom';
 
 class Signin extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.state = {
+      firstName:'',
+      lastName:'',
+      email:'',
+      password:'',
+      logIn: false
+      
+  }}
+  componentDidMount() {
+    firebase.database()
+    
+  }
+  handleChange(e){
+    this.setState({
+        [e.target.name]:e.target.value
+    })
+  }
+  handleLogin(e){
+
+    e.preventDefault();
+    firebase
+    .database()
+    .ref("users/")
+    .once("value")
+    .then((snapshot) =>{
+            
+        snapshot.forEach(child => {
+            console.log("Key",child.key)
+            console.log("Val",child.val())            
+      
+      localStorage.setItem('key', JSON.stringify(child.key));
+      this.setState({
+        logIn:true,
+      });
+		
+      })
+      
+      
+    }).catch((err)=>(console.log(err)));
+  }
   render() {
-    return (
+   
+      if(!this.state.logIn){
+        return (
       <Container component="main" maxWidth="xs">
         <div className={this.props.classes.paper}>
           <AccountCircleOutlinedIcon
@@ -17,7 +65,7 @@ class Signin extends Component {
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <form className={this.props.classes.form} noValidate>
+          <form className={this.props.classes.form} noValidate onSubmit={this.handleLogin}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -28,6 +76,9 @@ class Signin extends Component {
               name="email"
               autoComplete="email"
               autoFocus
+              value={this.state.email}
+
+              onChange={this.handleChange}
             />
             <TextField
               variant="outlined"
@@ -39,6 +90,9 @@ class Signin extends Component {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={this.state.password}
+              onChange={this.handleChange}
+              
             />
 
             <Button
@@ -52,8 +106,12 @@ class Signin extends Component {
             </Button>
           </form>
         </div>
-      </Container>
-    );
+    </Container> );}else{
+      return(
+        <Redirect to="/ProfilePag" />
+        ) 
+    }
+   
   }
 }
 export default withStyles({

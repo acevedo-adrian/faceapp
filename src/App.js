@@ -44,7 +44,8 @@ class App extends Component {
             <Signin />
           </Route>
           <Route path="/ProfilePag">
-            <ProfilePag users={this.state.users} />
+            {/* <ProfilePag users={this.state.users} /> */}
+            <ProfilePag />
           </Route>
         </Container>
       </Router>

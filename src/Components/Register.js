@@ -7,11 +7,11 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import AccountCircleOutlinedIcon from "@material-ui/icons/AccountCircleOutlined";
-import firebase from '../Initializers/firebase'
-
+import firebase from '../Initializers/firebase';
 
 class Register extends Component {
   // inicializamos nuestro estado inicial
+  
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -21,7 +21,9 @@ class Register extends Component {
       lastName:'',
       email:'',
       password:''
+      
   }
+  
   } 
   
   handleChange(e){  
@@ -29,17 +31,17 @@ class Register extends Component {
         [e.target.name]:e.target.value
     })
   }
-  handleRegister(e){
-
-
-    firebase.database().ref('users/').push({    
+  handleRegister(e){  
+    
+   
+    e.preventDefault();
+    firebase.database().ref('users/').push({   
         firstName: this.state.firstName,
         lastName : this.state.lastName,
         email:this.state.email,
         password:this.state.password
     }).catch(err=>console.log(err)
     )
-    e.preventDefault();
   }
 
   componentDidMount() {
